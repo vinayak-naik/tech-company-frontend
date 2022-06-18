@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { store } from "../store";
 import { Provider } from "react-redux";
+import "tailwindcss/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

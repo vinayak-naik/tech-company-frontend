@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import FormikControl from "./FormikControl";
+import FormikControl from "../../components/formComponents/FormikControl";
 
 function LoginForm() {
   const initialValues = {
