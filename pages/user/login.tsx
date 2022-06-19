@@ -1,23 +1,27 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormikControl from "../../components/formComponents/FormikControl";
+import { Button, TextField } from "@mui/material";
+import TextError from "../../components/formComponents/TextError";
+import { useLoginUserMutation } from "../../redux/api-query/usersApi";
+import { LoginFormIF } from "../../models/user.model";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
+
+const validationSchema = Yup.object({
+  email: Yup.string().email("Invalid email format").required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 function LoginForm() {
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email format").required("Required"),
-    password: Yup.string().required("Required"),
-  });
-
-  const onSubmit = (values: any) => {
+  const [loginUser] = useLoginUserMutation();
+  const onSubmit = async (values: LoginFormIF) => {
+    await loginUser(values);
     console.log("Form data", values);
   };
-
   return (
     <Formik
       initialValues={initialValues}
@@ -26,23 +30,32 @@ function LoginForm() {
     >
       {(formik) => {
         return (
-          <Form>
-            <FormikControl
-              control="input"
-              // control='chakraInput'
-              type="email"
-              label="Email"
-              name="email"
-            />
-            <FormikControl
-              control="input"
-              type="password"
-              label="Password"
-              name="password"
-            />
-            <button type="submit" disabled={!formik.isValid}>
-              Submit
-            </button>
+          <Form className="p-4">
+            <div className="m-4">
+              <TextField
+                type="text"
+                id="email"
+                label="Email"
+                variant="outlined"
+                {...formik.getFieldProps("email")}
+              />
+              <ErrorMessage component={TextError} name="email" />
+            </div>
+            <div className="m-4">
+              <TextField
+                type="text"
+                id="password"
+                label="password"
+                variant="outlined"
+                {...formik.getFieldProps("password")}
+              />
+              <ErrorMessage component={TextError} name="password" />
+            </div>
+            <div className="m-4">
+              <Button color="primary" type="submit" variant="outlined">
+                Submit
+              </Button>
+            </div>
           </Form>
         );
       }}

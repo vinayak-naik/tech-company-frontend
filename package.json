@@ -15,6 +15,9 @@
     "test-all": "yarn check-format && yarn check-lint && yarn check-types && yarn build"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.8.4",
     "@reduxjs/toolkit": "^1.8.2",
     "formik": "^2.2.9",
     "next": "12.1.6",

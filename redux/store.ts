@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { blogsApi } from "./redux/api-query/blogsApi";
-import counterReducer from "./redux/redux-toolkit/counterSlice";
+import { blogsApi } from "./api-query/blogsApi";
+import counterReducer from "./redux-toolkit/counterSlice";
 
 export const store = configureStore({
   reducer: {
