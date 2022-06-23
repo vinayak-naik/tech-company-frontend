@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import type { NextPage } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -13,6 +13,14 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
         {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/> */}
       </Head>
+      <video
+        src={`/api/videos?videoId=ss`}
+        width="800px"
+        height="auto"
+        controls
+        autoPlay
+        id="video-player"
+      />
       <div className="text-red-600 font-bold flex justify-center flex-col">
         <h1 className="text-center p-4">Home Page</h1>
         <Button
@@ -58,3 +66,9 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: { query: context.query },
+  };
+};
